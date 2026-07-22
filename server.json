@@ -1,0 +1,18 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schemas/server.json",
+  "name": "gios-air-mcp",
+  "description": "Local MCP server for GIOŚ Polish air-quality API. Real-time pollution and station data.",
+  "repository": {
+    "url": "https://github.com/bartosz-kuc/gios-air-mcp",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registry_name": "pypi",
+      "name": "gios-air-mcp",
+      "version": "0.1.0",
+      "runtime_hint": "uvx"
+    }
+  ]
+}
