@@ -3,7 +3,7 @@
   "name": "gios-air-mcp",
   "description": "Local MCP server for GIOŚ Polish air-quality API. Real-time pollution and station data.",
   "repository": {
-    "url": "https://github.com/bartosz-kuc/gios-air-mcp",
+    "url": "https://github.com/bartosz-kuc/honest-gios-air-mcp",
     "source": "github"
   },
   "version": "0.1.0",

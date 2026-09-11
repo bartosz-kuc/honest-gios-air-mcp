@@ -30,7 +30,7 @@ Four tools:
 ## Setup
 
 ```bash
-git clone https://github.com/bartosz-kuc/gios-air-mcp.git
+git clone https://github.com/bartosz-kuc/honest-gios-air-mcp.git
 cd gios-air-mcp
 python3 -m venv venv
 ./venv/bin/pip install -r requirements.txt

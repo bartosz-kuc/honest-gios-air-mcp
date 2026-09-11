@@ -11,7 +11,7 @@ normalizes to English for LLM consumption.
 Tools: list_stations, get_station_sensors, get_sensor_readings, get_air_index.
 
 Author: Bartosz Kuć <firma@bartosza.pl>
-Repo:   https://github.com/bartosz-kuc/gios-air-mcp
+Repo:   https://github.com/bartosz-kuc/honest-gios-air-mcp
 License: MIT
 """
 

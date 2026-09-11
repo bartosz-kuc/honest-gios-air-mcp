@@ -28,9 +28,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/bartosz-kuc/gios-air-mcp"
-Repository = "https://github.com/bartosz-kuc/gios-air-mcp"
-Issues = "https://github.com/bartosz-kuc/gios-air-mcp/issues"
+Homepage = "https://github.com/bartosz-kuc/honest-gios-air-mcp"
+Repository = "https://github.com/bartosz-kuc/honest-gios-air-mcp"
+Issues = "https://github.com/bartosz-kuc/honest-gios-air-mcp/issues"
 
 [project.scripts]
 gios-air-mcp = "gios_air_mcp:sync_main"
