@@ -1,4 +1,4 @@
-# gios-air-mcp
+# honest-gios-air-mcp
 
 Local MCP server for the **GIOŚ (Główny Inspektorat Ochrony Środowiska) air-quality public API** — the official Polish state environmental monitoring feed for PM2.5, PM10, NO2, SO2, O3, CO, C6H6, and the composite air-quality index.
 
@@ -6,16 +6,25 @@ Part of the [honest-mcp family](https://github.com/bartosz-kuc?tab=repositories)
 
 ## Why
 
-If you live in a Polish city — especially over winter — the difference between "moderate" and "very poor" air-quality index matters (indoor training vs opening the window). GIOŚ has ~200 stations and a public API but only in Polish JSON-LD. This server translates it to English keys and hands it to your AI so you can ask "how's the air in Kraków this afternoon?"
+If you live in a Polish city — especially over winter — the difference between "moderate" and "very poor" air-quality index matters (indoor training vs opening the window). GIOŚ runs close to 300 stations and a public API, but only in Polish JSON-LD. This server maps the main fields to English keys (see [Output keys](#output-keys)) and hands the data to your AI so you can ask "how's the air in Kraków this afternoon?"
 
 ## Features
 
 Four tools:
 
-- `list_stations` — search the ~200-station network by city or voivodeship
+- `list_stations` — search the station network by city or voivodeship
 - `get_station_sensors` — list the sensors installed at a station
 - `get_sensor_readings` — recent measurements (~24h) from one sensor
-- `get_air_index` — composite index for a station (very good / good / moderate / poor / very poor / hazardous) with the critical pollutant identified
+- `get_air_index` — composite index for a station (very good / good / moderate / poor / very poor / hazardous; category names are returned in Polish) with the critical pollutant code
+
+## Output keys
+
+Only some upstream Polish keys are mapped to English; the rest pass through unchanged, and values are never translated.
+
+- `list_stations`, `get_sensor_readings` — all fields use English keys.
+- `get_station_sensors` — English keys except the numeric indicator ID, which stays `Id wskaźnika`.
+- `get_air_index` — only `station_id`, `index_calculated_at`, `index_category` and `critical_pollutant_code` are English; all other fields — overall index value, source-data timestamp, per-pollutant fields (e.g. `Wartość indeksu dla wskaźnika PM10`) and the status flag — keep their Polish keys.
+- Text values stay in Polish, e.g. `index_category: "Bardzo dobry"` (very good) or `indicator_name: "tlenek węgla"` (carbon monoxide).
 
 ## Data source
 
@@ -31,10 +40,12 @@ Four tools:
 
 ```bash
 git clone https://github.com/bartosz-kuc/honest-gios-air-mcp.git
-cd gios-air-mcp
+cd honest-gios-air-mcp
 python3 -m venv venv
 ./venv/bin/pip install -r requirements.txt
 ```
+
+On Windows use `venv\Scripts\pip` and `venv\Scripts\python.exe` instead of the `venv/bin/...` paths shown here and below.
 
 Register with Claude Code:
 
@@ -59,7 +70,7 @@ Claude Desktop `claude_desktop_config.json`:
 
 > "How's the air in Kraków right now?"
 
-Two-step: `list_stations(city="Kraków", limit=5)` → pick a station ID → `get_air_index(station_id=...)` → text category and the critical pollutant.
+Two-step: `list_stations(city="Kraków", limit=5)` → pick a station ID → `get_air_index(station_id=...)` → category name (in Polish) and the critical pollutant code.
 
 > "PM2.5 readings for the last 24h from station 400."
 

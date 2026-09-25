@@ -5,8 +5,9 @@ for Environmental Protection's public API for the State Environmental
 Monitoring air-quality network (Państwowy Monitoring Środowiska / Jakość
 Powietrza). No auth.
 
-The upstream API responds in JSON-LD with Polish key names; this server
-normalizes to English for LLM consumption.
+The upstream API responds in JSON-LD with Polish key names; this server maps
+the common ones to English (station, sensor and reading fields, plus a few
+air-index fields). Other keys and all values pass through unchanged.
 
 Tools: list_stations, get_station_sensors, get_sensor_readings, get_air_index.
 
@@ -87,7 +88,7 @@ async def _list_tools() -> list[Tool]:
             name="list_stations",
             description=(
                 "List GIOŚ air-quality monitoring stations. Optional filters: city, voivodeship — both case-insensitive "
-                "substring match. The full network is ~200 stations; use filters or `limit` to keep responses small."
+                "substring match. The full network is close to 300 stations; use filters or `limit` to keep responses small."
             ),
             inputSchema={
                 "type": "object",
@@ -118,7 +119,12 @@ async def _list_tools() -> list[Tool]:
         ),
         Tool(
             name="get_air_index",
-            description="Get the composite air-quality index for a station (aggregates all pollutants into a single category: very good / good / moderate / poor / very poor / hazardous).",
+            description=(
+                "Get the composite air-quality index for a station (aggregates all pollutants into a single category: "
+                "very good / good / moderate / poor / very poor / hazardous). Only station_id, index_calculated_at, "
+                "index_category and critical_pollutant_code have English keys; other fields (overall and per-pollutant "
+                "index values and dates) keep their Polish keys, and category names are in Polish (e.g. 'Bardzo dobry')."
+            ),
             inputSchema={
                 "type": "object",
                 "properties": {"station_id": {"type": "integer", "description": "Numeric station ID"}},
