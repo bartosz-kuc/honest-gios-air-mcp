@@ -47,7 +47,8 @@ SENSOR_KEYS = {
     "Identyfikator stacji": "station_id",
     "Wskaźnik": "indicator_name",
     "Wskaźnik - kod": "indicator_code",
-    "Wskaźnik - id": "indicator_id",
+    "Wskaźnik - id": "indicator_id",  # older API key
+    "Id wskaźnika": "indicator_id",  # current API key (2026)
     "Wskaźnik - wzór": "indicator_formula",
 }
 READING_KEYS = {
@@ -58,7 +59,9 @@ READING_KEYS = {
 INDEX_KEYS = {
     "Identyfikator stacji pomiarowej": "station_id",
     "Data wykonania obliczeń indeksu": "index_calculated_at",
-    "Data źródłowych danych pomiarowych": "index_source_data_at",
+    "Data źródłowych danych pomiarowych": "index_source_data_at",  # older API key
+    # current API key for the station-level index (GIOŚ truncates it after "wskaźnika st")
+    "Data danych źródłowych, z których policzono wartość indeksu dla wskaźnika st": "index_source_data_at",
     "Nazwa kategorii indeksu": "index_category",
     "Kod zanieczyszczenia krytycznego": "critical_pollutant_code",
 }
@@ -122,7 +125,7 @@ async def _list_tools() -> list[Tool]:
             description=(
                 "Get the composite air-quality index for a station (aggregates all pollutants into a single category: "
                 "very good / good / moderate / poor / very poor / hazardous). Only station_id, index_calculated_at, "
-                "index_category and critical_pollutant_code have English keys; other fields (overall and per-pollutant "
+                "index_source_data_at, index_category and critical_pollutant_code have English keys; other fields (overall and per-pollutant "
                 "index values and dates) keep their Polish keys, and category names are in Polish (e.g. 'Bardzo dobry')."
             ),
             inputSchema={

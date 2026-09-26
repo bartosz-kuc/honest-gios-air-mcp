@@ -6,13 +6,5 @@
     "url": "https://github.com/bartosz-kuc/honest-gios-air-mcp",
     "source": "github"
   },
-  "version": "0.1.0",
-  "packages": [
-    {
-      "registry_name": "pypi",
-      "name": "gios-air-mcp",
-      "version": "0.1.0",
-      "runtime_hint": "uvx"
-    }
-  ]
+  "version": "0.1.0"
 }

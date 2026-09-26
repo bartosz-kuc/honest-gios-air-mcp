@@ -22,8 +22,8 @@ Four tools:
 Only some upstream Polish keys are mapped to English; the rest pass through unchanged, and values are never translated.
 
 - `list_stations`, `get_sensor_readings` — all fields use English keys.
-- `get_station_sensors` — English keys except the numeric indicator ID, which stays `Id wskaźnika`.
-- `get_air_index` — only `station_id`, `index_calculated_at`, `index_category` and `critical_pollutant_code` are English; all other fields — overall index value, source-data timestamp, per-pollutant fields (e.g. `Wartość indeksu dla wskaźnika PM10`) and the status flag — keep their Polish keys.
+- `get_station_sensors` — all fields use English keys (including `indicator_id`).
+- `get_air_index` — only `station_id`, `index_calculated_at`, `index_source_data_at`, `index_category` and `critical_pollutant_code` are English; all other fields — overall index value, per-pollutant fields (e.g. `Wartość indeksu dla wskaźnika PM10`) and the status flag — keep their Polish keys.
 - Text values stay in Polish, e.g. `index_category: "Bardzo dobry"` (very good) or `indicator_name: "tlenek węgla"` (carbon monoxide).
 
 ## Data source
